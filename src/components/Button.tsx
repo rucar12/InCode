@@ -1,16 +1,22 @@
 import React from 'react';
 import styles from './Button.module.scss';
+import classNames from 'classnames';
 
 type iProps = {
     disabled?: boolean;
     onClick: () => void;
     children: React.ReactNode;
+    className?: string;
 };
 
-const Button = ({ disabled, onClick, children }: iProps) => {
+const Button = ({ disabled, onClick, children, className }: iProps) => {
     return (
-        <button disabled={disabled} onClick={onClick} className={styles.button}>
-            {children}
+        <button
+            disabled={disabled}
+            onClick={onClick}
+            className={classNames(styles.button, className)}
+        >
+            <h5>{children}</h5>
         </button>
     );
 };

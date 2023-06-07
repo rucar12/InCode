@@ -1,3 +1,53 @@
+@import "src/styles/colors";
+@import "src/styles/typography";
+
 .signUp {
 
+  h1 {
+    color: $white;
+    margin: 72px 0 48px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .submit {
+      margin-top: 8px;
+    }
+  }
+
+  .createAccount {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+
+    .haveAccount {
+      font-family: map-get($p4-desktop, 'font-family');
+      font-style: map-get($p4-desktop, 'font-style');
+      font-weight: map-get($p4-desktop, 'font-weight');
+      font-size: map-get($p4-desktop, 'font-size');
+      line-height: map-get($p4-desktop, 'line-height');
+      letter-spacing: map-get($p4-desktop, 'letter-spacing');
+      text-transform: map-get($p4-desktop, 'text-transform');
+      margin: 0;
+      color: $brg;
+
+      span {
+        color: $blue;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 767px) {
+        font-family: map-get($p4-mobile, 'font-family');
+        font-style: map-get($p4-mobile, 'font-style');
+        font-weight: map-get($p4-mobile, 'font-weight');
+        font-size: map-get($p4-mobile, 'font-size');
+        line-height: map-get($p4-mobile, 'line-height');
+        letter-spacing: map-get($p4-mobile, 'letter-spacing');
+        text-transform: map-get($p4-mobile, 'text-transform');
+      }
+    }
+  }
 }

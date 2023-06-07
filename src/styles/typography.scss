@@ -182,7 +182,18 @@ $typography-styles-mobile: (
     ),
 );
 
+$p4-desktop: map-get($typography-styles-desktop, 'p4');
+$p4-mobile: map-get($typography-styles-mobile, 'p4');
+$p3-desktop: map-get($typography-styles-desktop, 'p3');
+$p3-mobile: map-get($typography-styles-mobile, 'p3');
+$p2-desktop: map-get($typography-styles-desktop, 'p2');
+$p2-mobile: map-get($typography-styles-mobile, 'p2');
+$p1-desktop: map-get($typography-styles-desktop, 'p1');
+$p1-mobile: map-get($typography-styles-mobile, 'p1');
+
+
 @media (max-width: 767px) {
+
     @each $typography, $styles in $typography-styles-mobile {
         #{$typography} {
             font-family: map-get($styles, 'font-family');
@@ -196,6 +207,8 @@ $typography-styles-mobile: (
     }
 }
 @media (min-width: 768px) {
+    $p4: map-get($typography-styles-desktop, 'p4');
+
     @each $typography, $styles in $typography-styles-desktop {
         #{$typography} {
             font-family: map-get($styles, 'font-family');
