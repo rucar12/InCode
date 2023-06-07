@@ -7,7 +7,7 @@ import Header from './Header';
 
 const App = () => {
     const withAuth = (component: React.ReactNode) => {
-        const isAuthed = !!localStorage.getItem('user');
+        const isAuthed = !!localStorage.getItem('token');
         return isAuthed ? component : <Navigate to={'/auth'} replace />;
     };
 
@@ -15,7 +15,7 @@ const App = () => {
         <div className={styles.app}>
             <Routes>
                 <Route element={withAuth(<Header />)}>
-                    <Route path="/" element={<Home />} />
+                    <Route index path="/" element={<Home />} />
                     <Route path="*" element="There's nothing here: 404!" />
                 </Route>
                 <Route path="auth" element={<Auth />} />

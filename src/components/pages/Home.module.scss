@@ -1,3 +1,44 @@
-.home {
+@import "src/styles/colors";
 
+.home {
+  max-width: 508px;
+  margin: 0 auto;
+
+  .title {
+    position: relative;
+    margin: 109px 0 48px;
+    text-align: center;
+
+    h2 {
+      margin: 0;
+      text-align: center;
+      color: $white;
+    }
+
+    img {
+      position: absolute;
+      top: -110px;
+      right: -110px;
+    }
+  }
+
+  .description {
+    margin: 0 auto;
+    margin-bottom: 48px ;
+    max-width: 466px;
+    color: white;
+    text-align: center;
+  }
+
+  .logout {
+    width: 99px;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 72px;
+  }
+
+  .image {
+    display: flex;
+    justify-content: center;
+  }
 }
