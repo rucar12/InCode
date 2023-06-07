@@ -14,8 +14,8 @@ const App = () => {
     return (
         <div className={styles.app}>
             <Routes>
-                <Route element={<Header />}>
-                    <Route path="/" element={withAuth(<Home />)} />
+                <Route element={withAuth(<Header />)}>
+                    <Route path="/" element={<Home />} />
                     <Route path="*" element="There's nothing here: 404!" />
                 </Route>
                 <Route path="auth" element={<Auth />} />
