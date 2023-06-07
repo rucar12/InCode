@@ -1,0 +1,19 @@
+@import "src/styles/colors";
+
+.header {
+  padding: 48px 0 0 48px;
+
+  .logo {
+    text-decoration: none;
+
+    h3 {
+      color: $white;
+      margin: 0;
+    }
+
+    h5 {
+      color: $greener;
+      margin: 0;
+    }
+  }
+}
