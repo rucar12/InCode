@@ -13,17 +13,9 @@ const Auth = () => {
         setSelectedTab(selectedTab === 'signUp' ? 'signIn' : 'signUp');
     };
 
-    const submitSignIn = () => {
-        console.log('submitSignIn');
-    };
-
-    const submitSignUp = () => {
-        console.log('submitSignUp');
-    };
-
     const tab = {
-        signIn: <SignIn onSubmit={submitSignIn} onChangeTab={changeTabHandler} />,
-        signUp: <SignUp onSubmit={submitSignUp} onChangeTab={changeTabHandler} />,
+        signIn: <SignIn onChangeTab={changeTabHandler} />,
+        signUp: <SignUp onChangeTab={changeTabHandler} />,
     };
 
     return (

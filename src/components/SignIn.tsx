@@ -2,20 +2,35 @@ import React, { useState } from 'react';
 import styles from './SignIn.module.scss';
 import Button from './Button';
 import Input from './Input';
+import { AppDispatch, login } from '../store/thunks/authThunks';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 type iProps = {
-    onSubmit: () => void;
     onChangeTab: () => void;
 };
 
-const SignIn = ({ onSubmit, onChangeTab }: iProps) => {
+const SignIn = ({ onChangeTab }: iProps) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+
+    const handleLogin = (e: any) => {
+        e?.preventDefault();
+        try {
+            dispatch(login({ username, password }));
+            navigate('/');
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     return (
         <section className={styles.signIn}>
             <h1>SIGN IN</h1>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleLogin}>
                 <Input
                     type={'text'}
                     placeholder={'Example123'}
@@ -30,7 +45,7 @@ const SignIn = ({ onSubmit, onChangeTab }: iProps) => {
                     onChange={(event) => setPassword(event.target.value)}
                     value={password}
                 />
-                <Button onClick={onSubmit} className={styles.submit}>
+                <Button onClick={handleLogin as any} className={styles.submit}>
                     Sign In
                 </Button>
             </form>

@@ -2,6 +2,10 @@
 
 /.idea
 
+# environments
+# not commented for deploying
+#.env
+
 # dependencies
 /node_modules
 /.pnp
