@@ -4,12 +4,16 @@ import Button from '../Button';
 import HOME_PNG from '../../media/HomeImg.png';
 import CONGRATS_SVG from '../../media/congrats.svg';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, logoutUser } from '../../store/thunks/authThunks';
 
 const Home = () => {
     const navigate = useNavigate();
 
+    const dispatch = useDispatch<AppDispatch>();
+
     const logoutHandler = () => {
-        localStorage.removeItem('token');
+        dispatch(logoutUser());
         navigate('/auth');
     };
 

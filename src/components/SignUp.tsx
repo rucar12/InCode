@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import styles from './SignUp.module.scss';
 import Button from './Button';
 import Input from './Input';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, registerUser } from '../store/thunks/authThunks';
 
 type iProps = {
-    onSubmit: () => void;
     onChangeTab: () => void;
 };
 
-const SignUp = ({ onChangeTab, onSubmit }: iProps) => {
+const SignUp = ({ onChangeTab }: iProps) => {
     const [fullName, setFullName] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
 
+    const dispatch = useDispatch<AppDispatch>();
+
+    const handleRegister = (e: any) => {
+        e?.preventDefault();
+        try {
+            dispatch(registerUser({ password, username, displayName: fullName }));
+            onChangeTab();
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
     return (
         <section className={styles.signUp}>
             <h1>SIGN UP</h1>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleRegister}>
                 <Input
                     type={'text'}
                     placeholder={'Example Name'}
@@ -46,7 +59,7 @@ const SignUp = ({ onChangeTab, onSubmit }: iProps) => {
                     onChange={(event) => setConfirmPassword(event.target.value)}
                     label={'Confirm Password'}
                 />
-                <Button onClick={onSubmit} className={styles.submit}>
+                <Button onClick={handleRegister as any} className={styles.submit}>
                     Sign Up
                 </Button>
             </form>
