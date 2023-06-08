@@ -32,24 +32,26 @@ const App = () => {
             const expiredAccess = jwtDecode(tokens.accessToken) as any;
             const accessDate = new Date(expiredAccess.exp * 1000);
             if (new Date() > accessDate) {
-                console.log(new Date(), accessDate);
                 dispatch(refreshToken(tokens));
             }
         }
     }, []);
 
-    const withAuth = () => {
-        return isAuthed ? <Navigate to={'/'} replace /> : <Navigate to={'/auth'} replace />;
+    const withAuth = (component: React.ReactNode) => {
+        return isAuthed ? component : <Navigate to={'/auth'} replace />;
+    };
+    const withoutAuth = (component: React.ReactNode) => {
+        return !isAuthed ? component : <Navigate to={'/'} replace />;
     };
 
     return (
         <div className={styles.app}>
             <Routes>
-                <Route element={<Header />}>
+                <Route element={withAuth(<Header />)}>
                     <Route index path="/" element={<Home />} />
-                    <Route path="*" element={withAuth()} />
+                    <Route path="*" element={"There's nothing here: 404!"} />
                 </Route>
-                <Route path="auth" element={<Auth />} />
+                <Route path="auth" element={withoutAuth(<Auth />)} />
             </Routes>
         </div>
     );
