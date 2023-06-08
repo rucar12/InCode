@@ -12,9 +12,21 @@ type iProps = {
     disabled?: boolean;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     type: 'text' | 'password';
+    name: string;
+    error?: string;
 };
 
-const Input = ({ className, placeholder, value, label, onChange, type, disabled }: iProps) => {
+const Input = ({
+    className,
+    placeholder,
+    value,
+    label,
+    onChange,
+    type,
+    disabled,
+    name,
+    error,
+}: iProps) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     return (
@@ -31,6 +43,7 @@ const Input = ({ className, placeholder, value, label, onChange, type, disabled 
                         onChange={onChange}
                         className={classNames(styles.inputField)}
                         disabled={disabled}
+                        name={name}
                         placeholder={placeholder}
                     />
                 )}
@@ -43,8 +56,9 @@ const Input = ({ className, placeholder, value, label, onChange, type, disabled 
                             onChange={onChange}
                             className={classNames(styles.inputField)}
                             disabled={disabled}
+                            name={name}
                             placeholder={placeholder}
-                            autoComplete={'off'}
+                            autoComplete={'new-password'}
                         />
                         <div
                             className={styles.eye}
@@ -59,6 +73,7 @@ const Input = ({ className, placeholder, value, label, onChange, type, disabled 
                     </div>
                 )}
             </div>
+            <p className={styles.inputError}>{!!error && error}</p>
         </div>
     );
 };
