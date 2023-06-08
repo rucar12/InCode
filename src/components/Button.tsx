@@ -4,16 +4,18 @@ import classNames from 'classnames';
 
 type iProps = {
     disabled?: boolean;
-    onClick: () => void;
+    onClick?: () => void;
     children: React.ReactNode;
     className?: string;
+    type?: 'button' | 'submit';
 };
 
-const Button = ({ disabled, onClick, children, className }: iProps) => {
+const Button = ({ disabled, onClick, children, className, type = 'button' }: iProps) => {
     return (
         <button
             disabled={disabled}
             onClick={onClick}
+            type={type}
             className={classNames(styles.button, className)}
         >
             <h5>{children}</h5>

@@ -3,8 +3,7 @@ import client from '../../api';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-type RootState = any;
-
+export type RootState = any;
 export type AppDispatch = ThunkDispatch<RootState, null, AnyAction>;
 export type iTokens = { accessToken: string; refreshToken: string };
 
@@ -34,10 +33,8 @@ export const logoutUser = () => async (dispatch: AppDispatch) => {
                 Authorization: `Bearer ${tokens?.accessToken}`,
             },
         };
-        const response = await client.get('/auth/logout', success);
+        await client.get('/auth/logout', success);
         localStorage.removeItem('token');
-        console.log(response);
-
         dispatch(logout());
     } catch (error) {
         console.log(error);
@@ -54,16 +51,21 @@ export const registerUser = (credentials: iRegisterCreds) => async (dispatch: Ap
     }
 };
 
-export const refreshToken = () => async (dispatch: AppDispatch) => {
-    try {
-        const tokens = getTokens();
-        const { data } = await client.post('/auth/refresh', tokens?.refreshToken);
-        const updatedToken = {
-            refreshToken: tokens?.refreshToken,
-            accessToken: data,
-        };
-        dispatch(loginSuccess(updatedToken));
-    } catch (error) {
-        console.log(error);
-    }
-};
+export const refreshToken =
+    (tokens: iTokens): any =>
+    async (dispatch: AppDispatch) => {
+        try {
+            const { data } = await client.post('/auth/refresh', {
+                refreshToken: tokens?.refreshToken,
+            });
+            const updatedToken = {
+                refreshToken: tokens?.refreshToken,
+                accessToken: data.accessToken,
+            };
+            localStorage.setItem('token', JSON.stringify(updatedToken));
+            dispatch(loginSuccess(updatedToken));
+        } catch (error) {
+            dispatch(loginFailure());
+            console.log(error);
+        }
+    };
